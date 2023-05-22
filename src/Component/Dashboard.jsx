@@ -22,19 +22,19 @@ export default function Dashboard() {
     let startOne = startDate?.toISOString()?.substring(0, 10) || '2022-04-01'
     let EndOne = endDate?.toISOString()?.substring(0, 10) || '2022-08-24'
 
-// Handle ------------------------------------------------------------------------->
+    // Handle ------------------------------------------------------------------------->
 
     const handleClick = (id) => {
-        setShow(id);      
+        setShow(id);
     };
     const handleChange = (event, value) => {
-        setPage1(value || 1);      
+        setPage1(value || 1);
     };
     const page = (pg) => {
         setPagee(pg)
-         }
+    }
 
-// Api------------------------------------------------------------------->
+    // Api------------------------------------------------------------------->
 
     const alldata = () => {
         axios.get('https://admindevapi.wowtalent.live/api/admin/dashboard/installstatasticcount?fromdate=2022-04-01&todate=2022-08-24&page=1&limit=10')
@@ -48,7 +48,7 @@ export default function Dashboard() {
     useEffect(() => {
         alldata();
     }, []);
-   
+
     const Tabledata = () => {
         URL = `https://admindevapi.wowtalent.live/api/admin/dashboard/installstatasticlist?fromdate=${startOne}&todate=${EndOne}&page=${page1}&limit=${show} `
         axios.get(URL)
@@ -61,18 +61,18 @@ export default function Dashboard() {
     useEffect(() => {
         Tabledata();
     }, [show, startDate, endDate, pagee, page1]);
-   
+
 
     return (
         <>
-               <nav className="navbar navbar-expand-lg navbar-light bg-none d-lg-none">
+            <nav className="navbar navbar-expand-lg navbar-light bg-none d-lg-none">
                 <div className="container-fluid">
                     <button className="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
                     <div className="collapse navbar-collapse text-light" id="navbarSupportedContent">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0">
-                        <li className=" w-100 m-1" id="navitem" ><i className="bi bi-view-list p-3"></i>Dashboard</li>
+                            <li className=" w-100 m-1" id="navitem" ><i className="bi bi-view-list p-3"></i>Dashboard</li>
                             <li className="w-100 m-1" id="navitem"><i className="bi bi-person-circle p-3"></i>WOW Users</li>
                             <li className="w-100 m-1" id="navitem"><i className="bi bi-camera-reels p-3"></i>Video Clips</li>
                             <li className="w-100 m-1" id="navitem"><i className="bi bi-exclamation-triangle p-3"></i>REported Content</li>
@@ -171,20 +171,16 @@ export default function Dashboard() {
                             </div>
                             <div className='conatiner-flude d-flex'>
                                 <DatePicker id='date' placeholderText='Start Date' selected={startDate} onChange={date => setStartDate(date)} />
-                                <p>to</p>
+                                <p className='heading text-white px-2'>to</p>
                                 <DatePicker id='date' placeholderText='End Date' selected={endDate} onChange={date => setEndDate(date)} />
                             </div>
                         </div>
                         <div className='tabledata text-white'>
                             <Table dataTable={dataTable} />
                         </div>
-                        <div className='row'>
-                            <div className='col'></div>
-                            <div className='col'></div>
-                            <div className='col-lg-6 col-md-6 col-sm-12'>
-                                <Stack spacing={1}>
-                                    <Pagination color="primary" count={10} page={page1} onChange={handleChange} />
-                                </Stack>
+                        <div className='row m-auto'>
+                            <div className='col justify-content-end d-flex m-auto mt-3'>
+                                <Pagination color="primary" count={10} page={page1} onChange={handleChange} />
                             </div>
                         </div>
                     </div>

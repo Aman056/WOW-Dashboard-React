@@ -2,11 +2,12 @@ import React from 'react'
 
 export default function Table(dataTable) {
 
-    {dataTable?.dataTable?.data?.data.map((item) =>
-            console.log())};
+    {
+        dataTable?.dataTable?.data?.data.map((item) =>
+            console.log())
+    };
     return (
         <>
-            <div className='' ></div>
             <table >
                 <thead>
                     <tr>
